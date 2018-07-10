@@ -41,7 +41,11 @@ namespace GymApp.Migrations
             foreach (var email in emails)
             {
                 if (context.Users.Any(u => u.UserName == email)) continue;
-                var user = new ApplicationUser { UserName = email, Email = email };
+                var user = new ApplicationUser {
+                    FirstName = "Olov",
+                    LastName = "Skötkonung",
+                    TimeOfRegistration = DateTime.Now
+                };
                 var result = userManager.Create(user, "foobar");
                 if (!result.Succeeded)
                 {

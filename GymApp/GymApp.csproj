@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201807100738352_bugfix.Designer.cs">
       <DependentUpon>201807100738352_bugfix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807101327434_AddedNameAndRegTimeToUsers.cs" />
+    <Compile Include="Migrations\201807101327434_AddedNameAndRegTimeToUsers.Designer.cs">
+      <DependentUpon>201807101327434_AddedNameAndRegTimeToUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GymClass.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807100738352_bugfix.resx">
       <DependentUpon>201807100738352_bugfix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807101327434_AddedNameAndRegTimeToUsers.resx">
+      <DependentUpon>201807101327434_AddedNameAndRegTimeToUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
