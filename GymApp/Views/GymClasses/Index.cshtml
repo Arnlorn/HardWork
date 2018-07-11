@@ -1,15 +1,14 @@
 ﻿@using Microsoft.AspNet.Identity;
 @model IEnumerable<GymApp.Models.GymClass>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -53,8 +52,10 @@
                 {
                     <Span> | </Span>
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id });
+                }
+                @if(User.Identity.IsAuthenticated)
+                { 
                     <Span> | </Span>
-
                     var x = User.Identity.GetUserId();
                     if(item.AttendingMembers.SingleOrDefault(m => m.Id == x) != null)
                     {
@@ -64,8 +65,8 @@
                     {
                     @Html.ActionLink("Book", "BookingToggle", new { id = item.Id });
                     }
-
                 }
+                
             </td>
         </tr>
     }

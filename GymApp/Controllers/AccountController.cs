@@ -155,7 +155,8 @@ namespace GymApp.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
-                    TimeOfRegistration = DateTime.Now
+                    TimeOfRegistration = DateTime.Now,
+                    UserName = model.Email
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

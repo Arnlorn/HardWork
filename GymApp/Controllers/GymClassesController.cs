@@ -17,9 +17,50 @@ namespace GymApp.Controllers
         // GET: GymClasses
         public ActionResult Index()
         {
+            ViewBag.Title = "Index";
             return View(db.GymClasses.ToList());
         }
 
+        public ActionResult FilteredIndex(string filter)
+        {
+            var currentUser = db.Users.Single(u => u.UserName == User.Identity.Name);
+            if (filter == "HistoricPasses")
+            {
+                var historicGymClasses = db.GymClasses.Where(p => p.StartTime < DateTime.Now );
+                var historicGymClassesForCurrentUser = new List<GymClass>();
+                foreach (var gymClass in historicGymClasses)
+                {
+                    if (gymClass.AttendingMembers.Contains(currentUser)) { historicGymClassesForCurrentUser.Add(gymClass);}
+                }
+                ViewBag.Title = "Historic Gym Passes";
+                return View("Index",historicGymClassesForCurrentUser);
+            }
+            else if (filter == "BookedPasses")
+            {
+                var futureGymClasses = db.GymClasses.Where(p => p.StartTime > DateTime.Now);
+                var futureGymClassesForCurrentUser = new List<GymClass>();
+                foreach (var gymClass in futureGymClasses)
+                {
+                    if (gymClass.AttendingMembers.Contains(currentUser)) { futureGymClassesForCurrentUser.Add(gymClass); }
+                }
+                ViewBag.Title = "Booked Passes";
+                return View("Index", futureGymClassesForCurrentUser);
+            }
+            else
+            {
+                ViewBag.Title = "Index";
+                return View("Index", db.GymClasses.ToList());
+            }
+
+
+
+
+
+
+
+        }
+
+ 
         // GET: GymClasses/Details/5
         public ActionResult Details(int? id)
         {
